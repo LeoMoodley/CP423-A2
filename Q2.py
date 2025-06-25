@@ -1,13 +1,10 @@
 # imports
-import numpy as np #required to generate matrix
-import math as math #required to perform log functions
-
+import numpy as np 
+import math as math 
 from numpy.linalg import norm
-
 from Q1 import *
 
-# Properties
-
+# Creates a zero-intialized TF-IDF matrix with shape
 def generate_matrix(doc_count: int, index_data: PositionalIndex):
     num_rows = doc_count
     num_cols = len(index_data.indexList)
@@ -17,10 +14,10 @@ def generate_matrix(doc_count: int, index_data: PositionalIndex):
 
     return empty_matrix
 
+# Computes the TF-IDF score for a document
 def tf_idf(term: str, doc_id: int, index: PositionalIndex, total_docs: int, scheme: int):
     tf_value = 0.0
 
-    # If the term is missing from the index, TF is 0 for all schemes
     if term not in index.indexList:
         return 0.0
 
@@ -55,21 +52,18 @@ def tf_idf(term: str, doc_id: int, index: PositionalIndex, total_docs: int, sche
         else:
             tf_value = 0.0
 
-    # Inverse Document Frequency
+    # Computes IDF component
     doc_freq = index.indexList[term][0]
     idf_value = math.log(total_docs / (doc_freq + 1), 10)
 
     return tf_value * idf_value
 
 
-#populate matrix with tfidf generated values
-def generate_tfidf_matrix(pos_ind:PositionalIndex, document_count:int, weight_scheme: int):
+# Populates an TF-IDF matrix for documents
+def generate_tf_idf_matrix(pos_ind:PositionalIndex, document_count:int, weight_scheme: int):
+    matrix = generate_matrix(document_count, pos_ind)
     col = 0
 
-    #generate the matrix
-    matrix = generate_matrix(document_count, pos_ind)
-
-    #calculate the tf-idf for each word and put value in the matrix
     for word in pos_ind.indexList:
         for doc in pos_ind.indexList[word][1]:
             tfidf = tf_idf(word, doc, pos_ind, document_count, weight_scheme)
@@ -77,7 +71,7 @@ def generate_tfidf_matrix(pos_ind:PositionalIndex, document_count:int, weight_sc
         col += 1 
     return matrix
 
-def query_vector(query_terms: list, vocab_size: int, index: PositionalIndex):
+def vector_query(query_terms: list, vocab_size: int, index: PositionalIndex):
     vector = np.zeros(vocab_size, dtype=int)
     position = 0
 
@@ -88,8 +82,8 @@ def query_vector(query_terms: list, vocab_size: int, index: PositionalIndex):
 
     return vector
 
-
-def relevant_doc(query_vec, tfidf_data, num_docs: int):
+# Computes top 5 relevant docs based on raw TF-IDF score
+def top_5_relevant_docs(query_vec, tfidf_data, num_docs: int):
     relevance_scores = np.zeros(num_docs, dtype=float)
 
     doc_id = 0
@@ -97,14 +91,15 @@ def relevant_doc(query_vec, tfidf_data, num_docs: int):
         relevance_scores[doc_id] = np.dot(query_vec, tfidf_data[doc_id])
         doc_id += 1
 
-    ranked_docs = np.argsort(-relevance_scores)  # sort in descending order
+    # Sorts in descending order
+    ranked_docs = np.argsort(-relevance_scores) 
     top_matches = ranked_docs[:5]
 
     return top_matches
 
 
-
-def cosine_sim(query_vec, tfidf_matrix, num_documents: int):
+# Computes top 5 docs using cosine similarity between document and query vectors
+def cosine_sims(query_vec, tfidf_matrix, num_documents: int):
     similarities = np.zeros(num_documents, dtype=float)
     idx = 0
 
@@ -122,51 +117,3 @@ def cosine_sim(query_vec, tfidf_matrix, num_documents: int):
     top_five = ranked_indices[:5]
 
     return top_five
-
-
-# if __name__ == "__main__":
-    
-#     #Testing
-#     print("Main for Q2")
-    
-#     print("Testing phrase queries...\n")
-#     index = PositionalIndex()
-
-#     # Add some sample data
-#     index.addIndex("apple", 1, 2)
-#     index.addIndex("apple", 2, 1)
-#     index.addIndex("apple", 3, 9)
-#     index.addIndex("with", 2, 2)
-#     index.addIndex("banana", 1, 3)
-#     index.addIndex("banana", 2, 2)
-#     index.addIndex("banana", 2, 3)
-#     index.addIndex("orange", 2, 4)
-#     index.addIndex("orange", 3, 8)
-
-#     # print positional index structure
-#     index.printIndexList()
-
-#     # generate TF-IDF matrix
-#     matrix = generate_tfidf_matrix(index, 4, 5)
-#     print("\nTF-IDF Matrix:")
-#     print(index.indexList.keys())
-#     print(matrix)
-    
-#     # create query vector
-#     query_vec = query_vector(["banana"], 4, index)
-#     print("\nQuery vector:")
-#     print(query_vec)
-
-#     # test TD-IDF
-#     top = relevant_doc(query_vec, matrix, 4)
-#     print("\nTF-IDF Result:")
-#     print("Top 5 dopcumets are:")
-#     for doc in top:
-#         print("Document " + str(doc + 1) + " (index " + str(doc) + ")")
-
-#     # test cosine similarity
-#     top_cosine = cosine_sim(query_vec, matrix, 4)
-#     print("\nCosine Similarity Result:")
-#     print("Top 5 dopcumets are:")
-#     for doc in top_cosine:
-#         print("Document " + str(doc + 1) + " (index " + str(doc) + ")")
