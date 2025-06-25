@@ -1,55 +1,70 @@
 # imports
-from Q1 import PositionalIndex, preprocess_text, search_phrase
+from Q1 import PositionalIndex, text_preprocessor, phrase_finder
 from Q2 import *
 import os
 
-# Properties
-# the list of ID's to document names
-documents: dict = {}
+# A dictionary that stores doc ID's in documents names keys
+documents = {}
 
-# the Positional Index that will hold all the document data
+# Intializes postional index
 positionalIndex: PositionalIndex = None
 
 '''
-Reads all the documents in the data folder, tokenize the text, and stores it in the Inverted Index data structure.
+Processes all files in the data directory by tokenizing their content and indexing the results into a positional inverted index.
 '''
 def createPositionalIndex():
+    # Initialize a new positional inverted index
     inverted_index = PositionalIndex()
+
+    # Retrieve all file names from the data directory
     file_names = os.listdir("./data/")
     total_files = len(file_names)
+
+    # counters for looping through files and document ID's
     current_index = 0
     doc_id = 1
 
+    # While that loops through each file of the "data" directory
     while current_index < total_files:
         file_name = file_names[current_index]
         file_path = "./data/" + file_name
 
         try:
+            # This tries to open and read the file, with UTF-8 encoding
             file = open(file_path, "r", encoding="utf-8", errors="replace")
             content = file.read()
             file.close()
         except Exception as e:
+            # If reading fails, prints error and skips the next file
             print(f"Error reading {file_name}: {e}")
             current_index += 1
             continue
-
-        tokens = preprocess_text(content)
+        
+        # Preprocess the file contnt into tokens with positions
+        tokens = text_preprocessor(content)
+        
+        # Converts the dictionary to list
         word_list = list(tokens.items())
         word_index = 0
         num_words = len(word_list)
 
+        # Add each token and its poition ot the inverted index
         while word_index < num_words:
             word, positions = word_list[word_index]
-            inverted_index.addIndex(word, doc_id, positions)
+            inverted_index.append_index(word, doc_id, positions)
             word_index += 1
 
+        # Maps document ID to its file
         documents[doc_id] = file_name
+        
+        # Increments doc ID and move on to next file
         doc_id += 1
         current_index += 1
 
     return inverted_index
 
 
+# Ensures the positional index data structure is only created once
 def checkToLoadDataFiles():
     global positionalIndex
     if (positionalIndex == None):
@@ -58,11 +73,11 @@ def checkToLoadDataFiles():
 
         print("Index creation complete.\n")
 
-'''
-Main function
-'''
 
+
+# Main function, handles the command-line interface
 def main():
+    # Function that displays main menu options
     def print_main_menu():
         print("\nSelect an Option:")
         print("0 - Exit")
@@ -70,6 +85,7 @@ def main():
         print("2 - TF-IDF Search")
         print("3 - Cosine Similarity Search\n")
 
+    # Asks the user for input and checks if it's in valid range 
     def get_valid_input(prompt, valid_range):
         try:
             value = int(input(prompt))
@@ -78,26 +94,32 @@ def main():
         except ValueError:
             pass
         return None
-
+    
+    # Gets query string from user and gets rid of whitespace
     def get_query_input():
         return input("Enter your query: ").strip()
 
+    # Handles the execution of the phrase query search
     def run_phrase_query():
         query = get_query_input()
-        tokens = preprocess_text(query)
+        tokens = text_preprocessor(query)
         checkToLoadDataFiles()
 
+        # Normalizes the query into cleaned string
         normalized_phrase = " ".join(tokens.keys())
-        results = search_phrase(positionalIndex.indexList, normalized_phrase)
+        results = phrase_finder(positionalIndex.indexList, normalized_phrase)
 
+        # Displays phrase query results
         print("\nPhrase Match Results:")
         print("Format: { doc_id: [positions] }")
         print(results)
 
+    # Controls execution of TF-IDF and cosine similarity searches
     def run_vector_search(method="tfidf"):
         query = get_query_input()
-        tokens = preprocess_text(query)
+        tokens = text_preprocessor(query)
 
+        # Prompts user to select TF-weighting scheme
         print("\nChoose a TF weighting scheme:")
         print("1 - Binary")
         print("2 - Raw Count")
@@ -112,21 +134,26 @@ def main():
 
         checkToLoadDataFiles()
 
-        tfidf_matrix = generate_tfidf_matrix(positionalIndex, len(documents), scheme)
-        query_vec = query_vector(tokens, len(positionalIndex.indexList), positionalIndex)
+        # Generates TF-IDF matrix 
+        tfidf_matrix = generate_tf_idf_matrix(positionalIndex, len(documents), scheme)
+        # Create query vector
+        query_vec = vector_query(tokens, len(positionalIndex.indexList), positionalIndex)
 
+        # Chooses the appropriate ranking method
         if method == "tfidf":
-            top_docs = relevant_doc(query_vec, tfidf_matrix, len(documents))
+            top_docs = top_5_relevant_docs(query_vec, tfidf_matrix, len(documents))
             title = "TF-IDF Result"
         else:
-            top_docs = cosine_sim(query_vec, tfidf_matrix, len(documents))
+            top_docs = cosine_sims(query_vec, tfidf_matrix, len(documents))
             title = "Cosine Similarity Result"
 
+        # Outputs top 5 most relevant documents
         print(f"\n{title}:")
         print("Top 5 documents:")
         for doc_id in top_docs:
             print(f"Document {doc_id + 1}")
 
+    # Maps user choices to their corresponding action functions
     actions = {
         1: run_phrase_query,
         2: lambda: run_vector_search("tfidf"),
@@ -151,5 +178,6 @@ def main():
         else:
             print("Unexpected error: No action defined.")
 
+# Starts program
 if __name__ == "__main__":
     main()
