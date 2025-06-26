@@ -54,81 +54,71 @@ TF-IDF & Cosine Similarity Search:
 Efficiency:
 - The positional index is created once and reused in future queries.
 # Steps to running the files
-1. Run a1_main.py
-2. You will be asked how many queries you need to run. Select a number
-3. Thereupon, you'll be asked to input a sentence, here's an example one:
-     - Ontario is good and Quebec is massive
-     - Press enter
-4. Then you'll be asked to input operators. When inputting them, make sure that they're uppercase and commas seperate them.
-    - Example
-      - OR, OR, OR
-5. You are done!
-6. In case you run into errors, repeat steps 1-4
+1. Run main.py
+2. You will be asked which function you want to execute or exit the program. Choose a number:
+     0 - Exit
+     1 - Phrase Query
+     2 - TF-IDF Search
+     3 - Cosine Similarity Search
+4. Thereupon, you'll be asked to input a query. So enter a query and press enter:
+5. Then the phrase query will perform calulations and output an result. If TF-IDF or Cosine was pucked you will be asked to choose
+   which weight scheme to utilize. So choose a number:
+      1 - Binary
+      2 - Raw Count
+      3 - Term Frequency
+      4 - Log Normalization
+      5 - Double Normalization
+7. You are done!
+8. In case you run into errors, repeat steps 1-5
 
 # Example of how to run the program
-```
-[nltk_data] Downloading package punkt to
-[nltk_data]     C:\Users\leomo\AppData\Roaming\nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-[nltk_data] Downloading package stopwords to
-[nltk_data]     C:\Users\leomo\AppData\Roaming\nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-[nltk_data] Downloading package punkt_tab to
-[nltk_data]     C:\Users\leomo\AppData\Roaming\nltk_data...
-[nltk_data]   Package punkt_tab is already up-to-date!
-How many queries do you need to run? 1
+Select an Option:
+0 - Exit
+1 - Phrase Query
+2 - TF-IDF Search
+3 - Cosine Similarity Search
 
-Query #1:
-Please Input a Sentence: Ontario is good and Quebec is massive
-Please Input Operations (comma-separated): OR, OR, OR
+# Phrase Query 
+- Enter option: 1
+- Enter the query: Good Morning
+- Initializing positional index...
+Phrase Match Results:
+Format: { doc_id: [positions] }
+{96: [698, 699], 124: [950, 951]}
 
-Expected preprocessed query: ontario OR good OR quebec OR massive
+# TF-IDF Search
+- Enter Option: 2
+- Enter the query: Good Morning
+Choose a TF weighting scheme:
+1 - Binary
+2 - Raw Count
+3 - Term Frequency
+4 - Log Normalization
+5 - Double Normalization
+- Enter a number (1-5)L 1
+- Initializing positional index...
+TF-IDF Result:
+Top 5 documents:
+Document 1
+Document 2
+Document 3
+Document 5
+Document 8
 
-Processing query...
-
-Reported Output:
-Number of matched documents: 40
-Minimum number of comparisons: 84
-List of retrieved document names:
-depth_1_List_of_Canadian_provinces_and_territories_by_historical_population.txt || ID: 1
-depth_1_List_of_Canadian_provinces_and_territories_by_historical_population.txt || ID: 1
-depth_2_1931_Canadian_census.txt || ID: 2
-depth_2_1931_Canadian_census.txt || ID: 2
-depth_2_Census_in_Canada.txt || ID: 3
-depth_2_Census_in_Canada.txt || ID: 3
-depth_2_First_Nations_in_Canada.txt || ID: 4
-depth_2_First_Nations_in_Canada.txt || ID: 4
-depth_2_First_Nations_in_Canada.txt || ID: 4
-depth_2_Northwest_Territories.txt || ID: 5
-depth_2_Northwest_Territories.txt || ID: 5
-depth_2_Nunavut.txt || ID: 6
-depth_2_Nunavut.txt || ID: 6
-depth_3_1911_Canadian_census.txt || ID: 7
-depth_3_1911_Canadian_census.txt || ID: 7
-depth_3_2021_Canadian_census.txt || ID: 10
-depth_3_2021_Canadian_census.txt || ID: 10
-depth_3_Canada.txt || ID: 12
-depth_3_Canada.txt || ID: 12
-depth_3_Canada.txt || ID: 12
-depth_3_Canadian_Confederation.txt || ID: 15
-depth_3_Canadian_Confederation.txt || ID: 15
-depth_3_Demographics_of_Canada.txt || ID: 17
-depth_3_Demographics_of_Canada.txt || ID: 17
-depth_3_First_Nations_(disambiguation).txt || ID: 18
-depth_3_French_language.txt || ID: 19
-depth_3_French_language.txt || ID: 19
-depth_3_Indian_Canadians.txt || ID: 21
-depth_3_Indian_Canadians.txt || ID: 21
-depth_3_Indian_Canadians.txt || ID: 21
-depth_3_Inuktitut_syllabics.txt || ID: 22
-depth_3_Northwest_Territory.txt || ID: 26
-depth_3_Northwest_Territory.txt || ID: 26
-depth_3_Nunatsiavut.txt || ID: 27
-depth_3_Nunavik.txt || ID: 28
-depth_3_Statistics_Canada.txt || ID: 30
-depth_3_Statistics_Canada.txt || ID: 30
-depth_3_Statistics_Canada.txt || ID: 30
-depth_3_Transfer_payment.txt || ID: 31
-depth_3_Transfer_payment.txt || ID: 31
-```
-
+# Cosine Similarity Search
+- Enter Option: 3
+- Enter the query: Good Morning
+Choose a TF weighting scheme:
+1 - Binary
+2 - Raw Count
+3 - Term Frequency
+4 - Log Normalization
+5 - Double Normalization
+- Enter a number (1-5): 1
+Cosine Similarity Result:
+Top 5 documents:
+Document 82
+Document 214
+Document 142
+Document 169
+Document 67
