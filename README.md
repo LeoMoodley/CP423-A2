@@ -73,52 +73,56 @@ Efficiency:
 
 # Example of how to run the program
 Select an Option:
-0 - Exit
-1 - Phrase Query
-2 - TF-IDF Search
-3 - Cosine Similarity Search
+- 0 - Exit
+- 1 - Phrase Query
+- 2 - TF-IDF Search
+- 3 - Cosine Similarity Search
 
 # Phrase Query 
 - Enter option: 1
 - Enter the query: Good Morning
 - Initializing positional index...
-Phrase Match Results:
-Format: { doc_id: [positions] }
-{96: [698, 699], 124: [950, 951]}
+
+- Phrase Match Results:
+- Format: { doc_id: [positions] }
+- {96: [698, 699], 124: [950, 951]}
 
 # TF-IDF Search
 - Enter Option: 2
 - Enter the query: Good Morning
-Choose a TF weighting scheme:
-1 - Binary
-2 - Raw Count
-3 - Term Frequency
-4 - Log Normalization
-5 - Double Normalization
+- Choose a TF weighting scheme:
+- 1 - Binary
+- 2 - Raw Count
+- 3 - Term Frequency
+- 4 - Log Normalization
+- 5 - Double Normalization
+
 - Enter a number (1-5)L 1
 - Initializing positional index...
-TF-IDF Result:
-Top 5 documents:
-Document 1
-Document 2
-Document 3
-Document 5
-Document 8
+
+- TF-IDF Result:
+- Top 5 documents:
+- Document 1
+- Document 2
+- Document 3
+- Document 5
+- Document 8
 
 # Cosine Similarity Search
 - Enter Option: 3
 - Enter the query: Good Morning
-Choose a TF weighting scheme:
-1 - Binary
-2 - Raw Count
-3 - Term Frequency
-4 - Log Normalization
-5 - Double Normalization
+- Choose a TF weighting scheme:
+- 1 - Binary
+- 2 - Raw Count
+- 3 - Term Frequency
+- 4 - Log Normalization
+- 5 - Double Normalization
 - Enter a number (1-5): 1
-Cosine Similarity Result:
-Top 5 documents:
-Document 82
-Document 214
-Document 142
-Document 169
-Document 67
+
+- Cosine Similarity Result:
+- Top 5 documents:
+- Document 82
+- Document 214
+- Document 142
+- Document 169
+- Document 67
