@@ -1,6 +1,5 @@
-# FIX THIS LATER
 # CP423-A2
-Due Date: May 31st, 2025 11:59 PM
+Due Date: June 28th, 2025 11:59 PM
 
 # Creator
 Leonardo Moodley
@@ -8,65 +7,52 @@ Leonardo Moodley
 Student ID: 210337850
 
 # Summary
-The main theme of the project was to use the programs to see queries being ran on Canadian Provinces on Wikipedia. This was done
-by creating the Index data structure, accepting input from the user, then using the operations 'AND', 'OR', and "NOT' Operations
-for the queries and doing error handling to make sure the input was correct, then finally running the queries and returning the data.
+The overall purpose of this project was to develop a Python program capable of handling phrase queries on a dataset 
+and ranking the results using a TF-IDF algorithm. The process included data processing, building a positional index,
+accepting user input, implementing phrase query logic, debugging the code, and executing various queries to retrieve relevant
+results from the dataset.
 # Summarization of each file
-### a1_part1.py
+### Q1.py
 
-This part contains code that web scrape then indexing the content from Canadian Provinces Historical Data Wikpedia page and stores them in the output folder.
+This file contains the positional index data structure, a preprocessing function, and the functions required to handle phrase queries.
+The positonal index supports adding and updating entries. For phrase queires, two helpe functions are used; verify_positional_prox which
+identifies word postions within the same document, and a merge algorithm combines matching document IDs unto a single result list.
 
-### a1_part2.py
+### Q2.py
 
-This script builds an inverted index from all .txt files in the output directory by preprocessing the text (lowercasing, removing stopwords/punctuation, and tokenizing). Each word is mapped to the files it appears in, using a set of (incorrectly) assigned "doc counters" based on token order rather than actual document IDs. It prints the resulting index, showing which words appear in which documents.
+This script includes functions for calculating Term Frequency (TF), TF-IDF scores, and cosine similarity. In Q2, matricies are always intially
+all zeros before being given any values. The calculation of TF-IDF values and updating their matricies and the generation of query vector is done by two indiviudal functions. 
+To compute TF-IDF relevance scores, the system performs a dot product between the query vector and the TF-IDF matrix. A separate function then identifies and returns the top 5 most relevant documents based on the highest TF-IDF scores.
+The cosine_sim function works similarly but ranks the top 5 documents using cosine similarity scores instead of raw TF-IDF values.
+Lastly, It's assumed that all Logarithmic Calculations use base 10.
+### main.py
 
-### a1_part3.py
+The main.py script is the entry point for a phrase and vector-based search engines. It utlilizes functions from Q1 (handles positional index and phrase queries) and Q2 (deals with TF-IDF and cosine similarity computations).
 
-This script processes boolean queries (AND, OR, NOT) over an inverted index to return matching document IDs and count comparisons used in the evaluation.
+Positional Index Creation:
+- Reads and tokenizes text files from the ./data/ directory
+- Constructs a positional inverted index mapping words to their positions in each document
+- Each document is assigned a unique document ID.
 
-Functions:
-1. is_valid_query_format(raw_query: str) -> bool
-  Purpose: Checks if a user query is in a valid format.
-  Returns: True if the query is valid. False with an error message otherwise.
+Main Functionality:
+- A command-line interface lets users choose from three search options:
+  1. Phrase Query Search,
+  2. TF-IDF Search,
+  3. Cosine Similarity Search
 
-2. process_query(query: str, inverted_index: InvertedIndex, totaldoc_counter: int)
-   Purpose: Parses and evaluates the query using the inverted index and total number of documents.
-   Returns: A list of document IDs that match the query. The number of comparisons made during evaluation.
-
-### a1_main.py
-
-This is the main script that does the following:
-  - Builds an inverted index from text files in the output/ folder.
-
-  - Accepts user queries using words and boolean operators (AND, OR, NOT).
-  
-  - Processes those queries and returns:
-  
-    - The number of matching documents.
-  
-    - How many comparisons were needed.
-  
-    - The names of the documents that matched.
+Phrase Query:
+- Accepts a phrase from the user, preprocesses it, and searches the positional index for exact matches (words appearing consecutively in the same document).
+- Returns results in the format: {docID: [positions]}.
 
 
-Main Program (__main__):
+TF-IDF & Cosine Similarity Search:
+- User provides a query and selects a term frequency (TF) weighting scheme.
+- A TF-IDF matrix is generated based on the chosen scheme.
+- A query vector is constructed and compared with document vectors: TF-IDF search ranks based on dot product scores. Cosine similarity search ranks based on cosine similarity scores.
+- Top 5 relevant documents are displayed based on the selected method.
 
-- Asks the user how many queries they want to run.
-
-- For each query:
-
-    - Gets a sentence and a list of operators.
-
-    - Constructs a full query using the cleaned words and operators.
-
-    - Checks if the query is valid.
-
-    - Builds the inverted index (if not already done).
-
-    - Runs the query and prints the matching documents and some stats.
-
-
-
+Efficiency:
+- The positional index is created once and reused in future queries.
 # Steps to running the files
 1. Run a1_main.py
 2. You will be asked how many queries you need to run. Select a number
