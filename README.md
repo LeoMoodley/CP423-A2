@@ -126,3 +126,5 @@ Select an Option:
 - Document 142
 - Document 169
 - Document 67
+
+## Cosine Similarity Report Analysis:
