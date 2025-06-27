@@ -128,3 +128,112 @@ Select an Option:
 - Document 67
 
 ## Cosine Similarity Report Analysis:
+The query utilized is 'Good Morning'
+
+#Binary:
+Pros:
+- Easy to calculate
+Cons:
+- Couldn't find anything bad
+
+- Output:
+TF-IDF Result:
+[[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
+Top 5 documents:
+Document 3
+Document 5
+Document 8
+Document 10
+Document 14
+
+# Raw Count
+Pros:
+- Easy to calculate
+Cons:
+- Couldn't find anything bad
+
+- Output:
+- F-IDF Result:
+[[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
+Top 5 documents:
+Document 3
+Document 5
+Document 8
+Document 10
+Document 14
+# Term Frequency
+Pros:
+- None
+Cons:
+- Takes too long to calculate
+
+- Output:
+- TF-IDF Result:
+[[0.00165664 0.00101124 0.00107641 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.0011393  0.0011393  0.0011393 ]]
+Top 5 documents:
+Document 142
+Document 82
+Document 67
+Document 28
+Document 214
+# Log Normalization
+Pros:
+- Easy to calculate
+  Values are normalized
+Cons:
+- Couldn't find anything bad
+
+- Output:
+TF-IDF Result:
+[[0.54008976 0.32967883 0.35092585 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.63070882 0.63070882 0.63070882]]
+Top 5 documents:
+Document 1
+Document 2
+Document 3
+Document 5
+Document 8
+# Double Normalization
+Pros:
+- None
+Cons:
+- takes too long to calculate
+
+- Output:
+TF-IDF Result:
+[[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
+Top 5 documents:
+Document 1
+Document 2
+Document 3
+Document 5
+Document 8
