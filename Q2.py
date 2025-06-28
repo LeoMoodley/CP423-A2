@@ -60,17 +60,20 @@ def tf_idf(term: str, doc_id: int, index: PositionalIndex, total_docs: int, sche
 
 
 # Populates an TF-IDF matrix for documents
-def generate_tf_idf_matrix(pos_ind:PositionalIndex, document_count:int, weight_scheme: int):
+def generate_tf_idf_matrix(pos_ind:PositionalIndex, document_count: int, weight_scheme: int):
+    # Initialize the TF-IDF matrix with zeros
     matrix = generate_matrix(document_count, pos_ind)
-    col = 0
 
-    for word in pos_ind.indexList:
-        # print("pos_ind.indexList[word][1] : ]n", pos_ind.indexList[word][1])
-        for doc in pos_ind.indexList[word][1]:
-            # print("doc", doc)
-            tfidf = tf_idf(word, doc, pos_ind, document_count, weight_scheme)
-            matrix[doc -1][col]= tfidf
-        col += 1 
+    # Iterate over each term (column) in the index list
+    for col_index, term in enumerate(pos_ind.indexList):
+        # Get the list of documents that contain the term
+        document_list = pos_ind.indexList[term][1]
+        
+        # Compute the TF-IDF value for each document containing the term
+        for doc_id in document_list:
+            tfidf_value = tf_idf(term, doc_id, pos_ind, document_count, weight_scheme)
+            matrix[doc_id - 1][col_index] = tfidf_value
+
     return matrix
 
 def vector_query(query_terms: list, vocab_size: int, index: PositionalIndex):
