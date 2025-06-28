@@ -159,7 +159,8 @@ Doc ID: 249 | File Name: zombies.txt
 ## Cosine Similarity Report Analysis:
 The query utilized is 'Good Morning'
 
-#Binary:
+# Binary
+
 
 Pros:
 - Easy to calculate
