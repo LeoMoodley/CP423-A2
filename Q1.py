@@ -1,5 +1,5 @@
 # imports
-from collections import Counter
+from collections import Counter, defaultdict
 import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -19,19 +19,20 @@ class PositionalIndex:
     def __init__(self):
         self.index = {}
 
-    def append_index(self, term: str, doc_id: int, pos: int):
+    def append_index(self, term: str, doc_id: int, pos: list):
         # Adds a term and its position to the index for a specific doc
-        if term in self.index:
-            doc_map = self.index[term][1]
+        for element in pos:
+            if term in self.index:
+                doc_map = self.index[term][1]
 
-            if doc_id in doc_map:
-                doc_map[doc_id].add(pos)
+                if doc_id in doc_map:
+                    doc_map[doc_id].add(element)
+                else:
+                    self.index[term][0] += 1  
+                    doc_map[doc_id] = {element}
             else:
-                self.index[term][0] += 1  
-                doc_map[doc_id] = {pos}
-        else:
-            # First occurance of term - intialize entry with document and position
-            self.index[term] = [1, {doc_id: {pos}}]
+                # First occurance of term - intialize entry with document and position
+                self.index[term] = [1, {doc_id: {element}}]
 
     def Output_Index_List(self):
         # Prints a formatted view of the positional index
@@ -60,11 +61,13 @@ Steps:
 def text_preprocessor(raw_text) -> dict:
 
     lowered = raw_text.lower()
+    # print(f"lowered : {lowered}")
     raw_tokens = word_tokenize(lowered)
+    # print(f"raw_tokens : {raw_tokens}")
 
-    token_positions = {}
+    token_positions = defaultdict(list)
     for idx, token in enumerate(raw_tokens, start=1):
-        token_positions[token] = idx
+        token_positions[token].append(idx)
 
     stopword_set = set(stopwords.words("english"))
     filtered = [t for t in raw_tokens if t not in stopword_set]
@@ -73,8 +76,12 @@ def text_preprocessor(raw_text) -> dict:
 
     cleaned = [t.strip() for t in alpha_tokens if len(t.strip()) > 1]
 
+    # print(f"cleaned : {cleaned}")
+
     # Filter valid tokens with recorded positions
     final_output = {term: token_positions[term] for term in cleaned if term in token_positions}
+
+    # print("final output : ", final_output)
 
     return final_output
 
@@ -157,7 +164,7 @@ def verify_positional_prox(doc_ids, current_positions, first_term_map, next_term
     for doc in doc_ids:
         first_positions = first_term_map[doc]
         next_positions = next_term_map[doc]
-
+    
         for pos1 in first_positions:
             for pos2 in next_positions:
                 if pos2 - pos1 == expected_gap:
