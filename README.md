@@ -160,6 +160,7 @@ Doc ID: 249 | File Name: zombies.txt
 The query utilized is 'Good Morning'
 
 #Binary:
+
 Pros:
 - Easy to calculate
 
