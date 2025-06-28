@@ -166,7 +166,8 @@ Pros:
 Cons:
 - Couldn't find anything bad
 
-- Output:
+
+Output:
 - TF-IDF Result:
 [[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -190,7 +191,8 @@ Pros:
 Cons:
 - Couldn't find anything bad
 
-- Output:
+
+Output:
 - Cosine Similarity Result:
 [[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -213,7 +215,8 @@ Pros:
 Cons:
 - Takes too long to calculate
 
-- Output:
+
+Output:
 - Cosine Similarity Result:
 [[0.00106477 0.00064995 0.00069184 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -235,7 +238,8 @@ Pros:
 Cons:
 - Couldn't find anything bad
 
-- Output:
+
+Output:
 - Cosine Similarity Result:
 [[0.54008976 0.32967883 0.35092585 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -258,7 +262,8 @@ Pros:
 Cons:
 - takes too long to calculate
 
-- Output:
+
+Output:
 - Cosine Similarity Result:
 [[0.94192316 0.57496391 0.61201897 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
