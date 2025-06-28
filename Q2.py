@@ -65,7 +65,9 @@ def generate_tf_idf_matrix(pos_ind:PositionalIndex, document_count:int, weight_s
     col = 0
 
     for word in pos_ind.indexList:
+        # print("pos_ind.indexList[word][1] : ]n", pos_ind.indexList[word][1])
         for doc in pos_ind.indexList[word][1]:
+            # print("doc", doc)
             tfidf = tf_idf(word, doc, pos_ind, document_count, weight_scheme)
             matrix[doc -1][col]= tfidf
         col += 1 
