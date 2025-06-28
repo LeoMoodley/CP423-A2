@@ -18,6 +18,7 @@ def createPositionalIndex():
 
     # Retrieve all file names from the data directory
     file_names = os.listdir("./data/")
+    # print(file_names)
     total_files = len(file_names)
 
     # counters for looping through files and document ID's
@@ -102,17 +103,33 @@ def main():
     # Handles the execution of the phrase query search
     def run_phrase_query():
         query = get_query_input()
+        # print(f"Query Input : {query}")
         tokens = text_preprocessor(query)
         checkToLoadDataFiles()
 
-        # Normalizes the query into cleaned string
+        # Limit the number of terms in the query
+        if len(tokens) > 5:
+            print("Error: Phrase queries are limited to a maximum of 5 terms.")
+            return
+
+        # Normalize the query into a cleaned string
         normalized_phrase = " ".join(tokens.keys())
         results = phrase_finder(positionalIndex.indexList, normalized_phrase)
 
-        # Displays phrase query results
-        print("\nPhrase Match Results:")
-        print("Format: { doc_id: [positions] }")
-        print(results)
+        print(f"results : {results}")
+        print(f"tokens : {tokens}")
+        print()
+        print()
+
+        # Count how many positions each doc has
+        doc_hits = [(doc_id, len(positions)) for doc_id, positions in results.items()]
+
+        # Sort by number of hits descending
+        top_docs = sorted(doc_hits, key=lambda x: x[1], reverse=True)
+        keys_string = ' '.join(tokens.keys())
+        print(f"Documents with most '{keys_string}' term pairs:")
+        for doc_id, count in top_docs:
+            print(f"Doc ID: {doc_id} | File Name: {documents.get(doc_id, 'unknown')}")
 
     # Controls execution of TF-IDF and cosine similarity searches
     def run_vector_search(method="tfidf"):
@@ -149,9 +166,11 @@ def main():
 
         # Outputs top 5 most relevant documents
         print(f"\n{title}:")
+        print(tfidf_matrix)
         print("Top 5 documents:")
         for doc_id in top_docs:
-            print(f"Document {doc_id + 1}")
+            file_name = documents.get(doc_id + 1, "Unknown")
+            print(f"Doc_id: {doc_id + 1} | file_name: {file_name}")
 
     # Maps user choices to their corresponding action functions
     actions = {
