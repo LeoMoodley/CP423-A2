@@ -235,6 +235,8 @@ Top 5 documents:
 Pros:
 - Easy to calculate
   Values are normalized
+
+  
 Cons:
 - Couldn't find anything bad
 
