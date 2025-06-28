@@ -162,6 +162,7 @@ The query utilized is 'Good Morning'
 #Binary:
 Pros:
 - Easy to calculate
+
 Cons:
 - Couldn't find anything bad
 
@@ -184,6 +185,8 @@ Cons:
 # Raw Count
 Pros:
 - Easy to calculate
+
+
 Cons:
 - Couldn't find anything bad
 
@@ -205,6 +208,8 @@ Top 5 documents:
 # Term Frequency
 Pros:
 - None
+
+
 Cons:
 - Takes too long to calculate
 
@@ -248,6 +253,8 @@ Cons:
 # Double Normalization
 Pros:
 - None
+
+
 Cons:
 - takes too long to calculate
 
