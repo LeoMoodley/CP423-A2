@@ -82,10 +82,25 @@ Select an Option:
 - Enter option: 1
 - Enter the query: Good Morning
 - Initializing positional index...
+- Index creation complete.
 
-- Phrase Match Results:
-- Format: { doc_id: [positions] }
-- {96: [698, 699], 124: [950, 951]}
+- results : {2: [66, 67], 44: [1150, 1151], 59: [4611, 4612], 80: [3204, 3205], 93: [613, 614], 96: [396, 397], -124: [950, 951], 131: [1557, 1558], 212: [3880, 3881], 219: [11, 12], 223: [2169, 2170], 249: [1118, 1119]}
+- tokens : {'good': [1], 'morning': [2]}
+
+
+- Documents with most 'good morning' term pairs:
+Doc ID: 2 | File Name: 13chil.txt
+Doc ID: 44 | File Name: bluebrd.txt
+Doc ID: 59 | File Name: bulprint.txt
+Doc ID: 80 | File Name: dskool.txt
+Doc ID: 93 | File Name: fgoose.txt
+Doc ID: 96 | File Name: flktrp.txt
+Doc ID: 124 | File Name: hell4.txt
+Doc ID: 131 | File Name: holmesbk.txt
+Doc ID: 212 | File Name: solitary.txt
+Doc ID: 219 | File Name: startrek.txt
+Doc ID: 223 | File Name: taxnovel.txt
+Doc ID: 249 | File Name: zombies.txt
 
 # TF-IDF Search
 - Enter Option: 2
@@ -101,12 +116,19 @@ Select an Option:
 - Initializing positional index...
 
 - TF-IDF Result:
+[[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
 - Top 5 documents:
-- Document 1
-- Document 2
-- Document 3
-- Document 5
-- Document 8
+- Doc_id: 1 | file_name: 100west.txt
+- Doc_id: 2 | file_name: 13chil.txt
+- Doc_id: 3 | file_name: 3gables.txt
+- Doc_id: 5 | file_name: 3student.txt
+- Doc_id: 8 | file_name: 5orange.txt
 
 # Cosine Similarity Search
 - Enter Option: 3
@@ -120,12 +142,19 @@ Select an Option:
 - Enter a number (1-5): 1
 
 - Cosine Similarity Result:
+[[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 0.         0.         0.        ]
+ [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
 - Top 5 documents:
-- Document 82
-- Document 214
-- Document 142
-- Document 169
-- Document 67
+- Doc_id: 82 | file_name: elveshoe.txt
+- Doc_id: 214 | file_name: spider.txt
+- Doc_id: 142 | file_name: kneeslapper.txt
+- Doc_id: 169 | file_name: mtinder.txt
+- Doc_id: 67 | file_name: clevdonk.txt
 
 ## Cosine Similarity Report Analysis:
 The query utilized is 'Good Morning'
@@ -137,7 +166,7 @@ Cons:
 - Couldn't find anything bad
 
 - Output:
-TF-IDF Result:
+- TF-IDF Result:
 [[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -145,12 +174,12 @@ TF-IDF Result:
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
-Top 5 documents:
-Document 3
-Document 5
-Document 8
-Document 10
-Document 14
+- Top 5 documents:
+- Doc_id: 82 | file_name: elveshoe.txt
+- Doc_id: 214 | file_name: spider.txt
+- Doc_id: 142 | file_name: kneeslapper.txt
+- Doc_id: 169 | file_name: mtinder.txt
+- Doc_id: 67 | file_name: clevdonk.txt
 
 # Raw Count
 Pros:
@@ -159,7 +188,7 @@ Cons:
 - Couldn't find anything bad
 
 - Output:
-- F-IDF Result:
+- Cosine Similarity Result:
 [[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -168,11 +197,11 @@ Cons:
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
 Top 5 documents:
-Document 3
-Document 5
-Document 8
-Document 10
-Document 14
+- Doc_id: 82 | file_name: elveshoe.txt
+- Doc_id: 190 | file_name: psf.txt
+- Doc_id: 215 | file_name: spiders.txt
+- Doc_id: 198 | file_name: roger1.txt
+- Doc_id: 212 | file_name: solitary.txt
 # Term Frequency
 Pros:
 - None
@@ -180,20 +209,20 @@ Cons:
 - Takes too long to calculate
 
 - Output:
-- TF-IDF Result:
-[[0.00165664 0.00101124 0.00107641 ... 0.         0.         0.        ]
+- Cosine Similarity Result:
+[[0.00106477 0.00064995 0.00069184 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  ...
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
- [0.         0.         0.         ... 0.0011393  0.0011393  0.0011393 ]]
+ [0.         0.         0.         ... 0.00038422 0.00038422 0.00038422]]
 Top 5 documents:
-Document 142
-Document 82
-Document 67
-Document 28
-Document 214
+- Doc_id: 82 | file_name: elveshoe.txt
+- Doc_id: 190 | file_name: psf.txt
+- Doc_id: 215 | file_name: spiders.txt
+- Doc_id: 198 | file_name: roger1.txt
+- Doc_id: 212 | file_name: solitary.txt
 # Log Normalization
 Pros:
 - Easy to calculate
@@ -202,7 +231,7 @@ Cons:
 - Couldn't find anything bad
 
 - Output:
-TF-IDF Result:
+- Cosine Similarity Result:
 [[0.54008976 0.32967883 0.35092585 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
@@ -210,12 +239,12 @@ TF-IDF Result:
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.63070882 0.63070882 0.63070882]]
-Top 5 documents:
-Document 1
-Document 2
-Document 3
-Document 5
-Document 8
+- Top 5 documents:
+- Doc_id: 82 | file_name: elveshoe.txt
+- Doc_id: 2 | file_name: 13chil.txt
+- Doc_id: 190 | file_name: psf.txt
+- Doc_id: 59 | file_name: bulprint.txt
+- Doc_id: 215 | file_name: spiders.txt
 # Double Normalization
 Pros:
 - None
@@ -223,17 +252,17 @@ Cons:
 - takes too long to calculate
 
 - Output:
-TF-IDF Result:
-[[1.79413936 1.09516935 1.16575043 ... 0.         0.         0.        ]
+- Cosine Similarity Result:
+[[0.94192316 0.57496391 0.61201897 ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
  ...
  [0.         0.         0.         ... 0.         0.         0.        ]
  [0.         0.         0.         ... 0.         0.         0.        ]
- [0.         0.         0.         ... 2.09516935 2.09516935 2.09516935]]
-Top 5 documents:
-Document 1
-Document 2
-Document 3
-Document 5
-Document 8
+ [0.         0.         0.         ... 1.05523128 1.05523128 1.05523128]]
+- Top 5 documents:
+- Doc_id: 82 | file_name: elveshoe.txt
+- Doc_id: 214 | file_name: spider.txt
+- Doc_id: 169 | file_name: mtinder.txt
+- Doc_id: 142 | file_name: kneeslapper.txt
+- Doc_id: 67 | file_name: clevdonk.txt
